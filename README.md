@@ -29,7 +29,13 @@ curl -X POST http://localhost:8000/api/extract \
 
 ## Run tests
 
+<<<<<<< HEAD
 ````bash
 pytest -q
 ```# pdf
 ````
+=======
+```bash
+pytest -q
+```
+>>>>>>> origin/codex/add-pdf-table-extractor-feature

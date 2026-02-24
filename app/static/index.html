@@ -1,0 +1,118 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>PDF Table Extractor</title>
+    <style>
+      body {
+        margin: 0;
+        font-family: Inter, Arial, sans-serif;
+        background: #f4f7fb;
+        color: #1f2937;
+      }
+      .container {
+        max-width: 900px;
+        margin: 3rem auto;
+        padding: 1.5rem;
+        background: #fff;
+        border-radius: 14px;
+        box-shadow: 0 12px 30px rgba(31, 41, 55, 0.1);
+      }
+      h1 {
+        margin-top: 0;
+      }
+      .muted {
+        color: #6b7280;
+      }
+      .row {
+        display: flex;
+        gap: 0.75rem;
+        margin: 1rem 0 0.75rem;
+      }
+      button {
+        border: none;
+        border-radius: 8px;
+        padding: 0.7rem 1.1rem;
+        background: #2563eb;
+        color: white;
+        cursor: pointer;
+      }
+      button:disabled {
+        background: #93c5fd;
+        cursor: not-allowed;
+      }
+      #status {
+        min-height: 1.2rem;
+        font-size: 0.95rem;
+      }
+      pre {
+        background: #111827;
+        color: #e5e7eb;
+        border-radius: 10px;
+        padding: 1rem;
+        overflow: auto;
+        max-height: 500px;
+      }
+    </style>
+  </head>
+  <body>
+    <main class="container">
+      <h1>PDF Table Extractor</h1>
+      <p class="muted">Upload a PDF (invoice, receipt, or report) to extract table data as structured JSON.</p>
+
+      <div class="row">
+        <input type="file" id="pdfFile" accept="application/pdf" />
+        <button id="extractBtn">Extract JSON</button>
+      </div>
+
+      <p id="status" class="muted"></p>
+      <pre id="output">{
+  "message": "JSON output will appear here"
+}</pre>
+    </main>
+
+    <script>
+      const fileInput = document.getElementById('pdfFile');
+      const extractBtn = document.getElementById('extractBtn');
+      const statusEl = document.getElementById('status');
+      const outputEl = document.getElementById('output');
+
+      extractBtn.addEventListener('click', async () => {
+        const file = fileInput.files[0];
+        if (!file) {
+          statusEl.textContent = 'Please choose a PDF file first.';
+          return;
+        }
+
+        const formData = new FormData();
+        formData.append('file', file);
+
+        extractBtn.disabled = true;
+        statusEl.textContent = 'Extracting tables...';
+
+        try {
+          const response = await fetch('/api/extract', {
+            method: 'POST',
+            body: formData,
+          });
+
+          const json = await response.json();
+
+          if (!response.ok) {
+            statusEl.textContent = `Error: ${json.detail ?? 'Failed to parse PDF'}`;
+            outputEl.textContent = JSON.stringify(json, null, 2);
+            return;
+          }
+
+          statusEl.textContent = `Done. Found ${json.table_count} table(s) across ${json.page_count} page(s).`;
+          outputEl.textContent = JSON.stringify(json, null, 2);
+        } catch (error) {
+          statusEl.textContent = `Unexpected error: ${error}`;
+        } finally {
+          extractBtn.disabled = false;
+        }
+      });
+    </script>
+  </body>
+</html>

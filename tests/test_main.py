@@ -26,4 +26,8 @@ def test_infer_document_type_variants():
     assert infer_document_type("INVOICE #123\nBill To: ACME") == "invoice"
     assert infer_document_type("Store RECEIPT\nSubtotal") == "receipt"
     assert infer_document_type("Quarterly KPI Report") == "report"
+<<<<<<< HEAD
     assert infer_document_type("random text") == "unknown"
+=======
+    assert infer_document_type("random text") == "unknown"
+>>>>>>> origin/codex/add-pdf-table-extractor-feature
