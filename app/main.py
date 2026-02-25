@@ -15,12 +15,17 @@ STATIC_DIR = Path(__file__).parent / "static"
 STATIC_INDEX = STATIC_DIR / "index.html"
 
 <<<<<<< ours
+<<<<<<< ours
 <<<<<<< HEAD
 app.mount("/static", StaticFiles(directory=STATIC_DIR), name="static")
 =======
 if STATIC_DIR.exists():
     app.mount("/static", StaticFiles(directory=STATIC_DIR), name="static")
 >>>>>>> origin/codex/add-pdf-table-extractor-feature
+=======
+if STATIC_DIR.exists():
+    app.mount("/static", StaticFiles(directory=STATIC_DIR), name="static")
+>>>>>>> theirs
 =======
 if STATIC_DIR.exists():
     app.mount("/static", StaticFiles(directory=STATIC_DIR), name="static")
@@ -33,9 +38,12 @@ def index() -> Response:
     if STATIC_INDEX.exists():
         return FileResponse(STATIC_INDEX)
 <<<<<<< ours
+<<<<<<< ours
 <<<<<<< HEAD
     return HTMLResponse("<h1>PDF Table Extractor</h1><p>Frontend asset missing.</p>", status_code=500)
 =======
+=======
+>>>>>>> theirs
 =======
 >>>>>>> theirs
     return HTMLResponse(
@@ -43,7 +51,10 @@ def index() -> Response:
         status_code=200,
     )
 <<<<<<< ours
+<<<<<<< ours
 >>>>>>> origin/codex/add-pdf-table-extractor-feature
+=======
+>>>>>>> theirs
 =======
 >>>>>>> theirs
 
@@ -123,11 +134,15 @@ async def extract_tables(file: UploadFile = File(...)) -> dict[str, Any]:
         "table_count": total_tables,
         "pages": pages_payload,
 <<<<<<< ours
+<<<<<<< ours
 <<<<<<< HEAD
     }
 =======
     }
 >>>>>>> origin/codex/add-pdf-table-extractor-feature
+=======
+    }
+>>>>>>> theirs
 =======
     }
 >>>>>>> theirs

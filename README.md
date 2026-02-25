@@ -17,6 +17,11 @@ source .venv/bin/activate
 pip install -r requirements.txt
 uvicorn app.main:app --host 0.0.0.0 --port 8000
 <<<<<<< ours
+<<<<<<< ours
+=======
+# or use FastAPI CLI from project root
+fastapi dev main.py
+>>>>>>> theirs
 =======
 # or use FastAPI CLI from project root
 fastapi dev main.py
@@ -35,6 +40,7 @@ curl -X POST http://localhost:8000/api/extract \
 ## Run tests
 
 <<<<<<< ours
+<<<<<<< ours
 <<<<<<< HEAD
 ````bash
 pytest -q
@@ -45,6 +51,11 @@ pytest -q
 pytest -q
 ```
 >>>>>>> origin/codex/add-pdf-table-extractor-feature
+=======
+```bash
+pytest -q
+```
+>>>>>>> theirs
 =======
 ```bash
 pytest -q
