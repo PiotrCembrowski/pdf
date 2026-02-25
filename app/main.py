@@ -14,12 +14,17 @@ app = FastAPI(title="PDF Table Extractor")
 STATIC_DIR = Path(__file__).parent / "static"
 STATIC_INDEX = STATIC_DIR / "index.html"
 
+<<<<<<< ours
 <<<<<<< HEAD
 app.mount("/static", StaticFiles(directory=STATIC_DIR), name="static")
 =======
 if STATIC_DIR.exists():
     app.mount("/static", StaticFiles(directory=STATIC_DIR), name="static")
 >>>>>>> origin/codex/add-pdf-table-extractor-feature
+=======
+if STATIC_DIR.exists():
+    app.mount("/static", StaticFiles(directory=STATIC_DIR), name="static")
+>>>>>>> theirs
 
 
 @app.get("/", include_in_schema=False)
@@ -27,14 +32,20 @@ if STATIC_DIR.exists():
 def index() -> Response:
     if STATIC_INDEX.exists():
         return FileResponse(STATIC_INDEX)
+<<<<<<< ours
 <<<<<<< HEAD
     return HTMLResponse("<h1>PDF Table Extractor</h1><p>Frontend asset missing.</p>", status_code=500)
 =======
+=======
+>>>>>>> theirs
     return HTMLResponse(
         "<h1>PDF Table Extractor</h1><p>Frontend assets are unavailable in this environment.</p>",
         status_code=200,
     )
+<<<<<<< ours
 >>>>>>> origin/codex/add-pdf-table-extractor-feature
+=======
+>>>>>>> theirs
 
 
 def _clean_cell(cell: Any) -> str:
@@ -111,8 +122,12 @@ async def extract_tables(file: UploadFile = File(...)) -> dict[str, Any]:
         "page_count": len(pages_payload),
         "table_count": total_tables,
         "pages": pages_payload,
+<<<<<<< ours
 <<<<<<< HEAD
     }
 =======
     }
 >>>>>>> origin/codex/add-pdf-table-extractor-feature
+=======
+    }
+>>>>>>> theirs

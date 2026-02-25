@@ -1,6 +1,10 @@
 __pycache__/
+<<<<<<< ours
 <<<<<<< HEAD
 *.pyc
 =======
 *.pyc
 >>>>>>> origin/codex/add-pdf-table-extractor-feature
+=======
+*.pyc
+>>>>>>> theirs
