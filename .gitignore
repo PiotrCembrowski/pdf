@@ -1,14 +1,6 @@
 __pycache__/
-<<<<<<< ours
-<<<<<<< ours
-<<<<<<< HEAD
 *.pyc
-=======
-*.pyc
->>>>>>> origin/codex/add-pdf-table-extractor-feature
-=======
-*.pyc
->>>>>>> theirs
-=======
-*.pyc
->>>>>>> theirs
+.venv/
+env/
+venv/
+.pytest_cache/
