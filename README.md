@@ -22,6 +22,11 @@ fastapi dev main.py
 
 Open: `http://localhost:8000`
 
+## Project entrypoints
+
+- Root `main.py` is a small shim that re-exports `app` for FastAPI CLI usage (`fastapi dev main.py`).
+- Main application code lives in `app/main.py`.
+
 ## Example API usage
 
 ```bash
