@@ -10,26 +10,18 @@ from fastapi import FastAPI, File, HTTPException, UploadFile
 from fastapi.responses import FileResponse, HTMLResponse, Response
 from fastapi.staticfiles import StaticFiles
 
-app = FastAPI(title="PDF Table Extractor")
 STATIC_DIR = Path(__file__).parent / "static"
 STATIC_INDEX = STATIC_DIR / "index.html"
 
-<<<<<<< ours
-<<<<<<< ours
-<<<<<<< HEAD
-app.mount("/static", StaticFiles(directory=STATIC_DIR), name="static")
-=======
-if STATIC_DIR.exists():
-    app.mount("/static", StaticFiles(directory=STATIC_DIR), name="static")
->>>>>>> origin/codex/add-pdf-table-extractor-feature
-=======
-if STATIC_DIR.exists():
-    app.mount("/static", StaticFiles(directory=STATIC_DIR), name="static")
->>>>>>> theirs
-=======
-if STATIC_DIR.exists():
-    app.mount("/static", StaticFiles(directory=STATIC_DIR), name="static")
->>>>>>> theirs
+
+def create_app() -> FastAPI:
+    application = FastAPI(title="PDF Table Extractor")
+    if STATIC_DIR.exists():
+        application.mount("/static", StaticFiles(directory=STATIC_DIR), name="static")
+    return application
+
+
+app = create_app()
 
 
 @app.get("/", include_in_schema=False)
@@ -37,26 +29,10 @@ if STATIC_DIR.exists():
 def index() -> Response:
     if STATIC_INDEX.exists():
         return FileResponse(STATIC_INDEX)
-<<<<<<< ours
-<<<<<<< ours
-<<<<<<< HEAD
-    return HTMLResponse("<h1>PDF Table Extractor</h1><p>Frontend asset missing.</p>", status_code=500)
-=======
-=======
->>>>>>> theirs
-=======
->>>>>>> theirs
     return HTMLResponse(
         "<h1>PDF Table Extractor</h1><p>Frontend assets are unavailable in this environment.</p>",
         status_code=200,
     )
-<<<<<<< ours
-<<<<<<< ours
->>>>>>> origin/codex/add-pdf-table-extractor-feature
-=======
->>>>>>> theirs
-=======
->>>>>>> theirs
 
 
 def _clean_cell(cell: Any) -> str:
@@ -133,16 +109,7 @@ async def extract_tables(file: UploadFile = File(...)) -> dict[str, Any]:
         "page_count": len(pages_payload),
         "table_count": total_tables,
         "pages": pages_payload,
-<<<<<<< ours
-<<<<<<< ours
-<<<<<<< HEAD
     }
-=======
-    }
->>>>>>> origin/codex/add-pdf-table-extractor-feature
-=======
-    }
->>>>>>> theirs
-=======
-    }
->>>>>>> theirs
+
+
+__all__ = ["app", "create_app", "infer_document_type", "extract_tables"]
